@@ -1,4 +1,3 @@
-import React from "react";
 import Jumbotron  from "../../components/Jumbotron";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -8,20 +7,17 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get("https://exercisedb.p.rapidapi.com/exercises/name/%7Bname%7D", {
+      .get("https://exercisedb.p.rapidapi.com/exercises", {
         headers: {
           "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
           "X-RapidAPI-Key":
             "c9bc40e250mshc9a0253036e8abep1a9eccjsn02f8dbdd6992",
         },
       })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  },[])
+      .then(({ data }) => setWorkouts(data))
+      .catch((error) => console.log(error));
+      
+  },[]);
 
   return (
     <div>
