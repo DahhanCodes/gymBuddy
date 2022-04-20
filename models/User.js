@@ -1,6 +1,10 @@
 const { Schema, model, Types } = require('mongoose');
+<<<<<<< HEAD
 const bcrypt = require('bcrypt');
 const { isEmail, isStrongPassword } = require('validator').default;
+=======
+
+>>>>>>> 716ee4044c4903d80c32e3c6b028b5f10a9d2545
 const UserSchema = new Schema(
    {
       username: {
@@ -14,16 +18,22 @@ const UserSchema = new Schema(
       email: {
          type: String,
          required: true,
+<<<<<<< HEAD
          validate: [isEmail, 'Invalid email format!'],
+=======
+>>>>>>> 716ee4044c4903d80c32e3c6b028b5f10a9d2545
       },
       password: {
          type: String,
          required: true,
+<<<<<<< HEAD
          //Todo: Need to uncomment this validation later
          // validate: [
          //    isStrongPassword,
          //    'Password must have 8 charachters, 1 lowercase, 1 uppercase, 1 number and 1 symbol',
          // ],
+=======
+>>>>>>> 716ee4044c4903d80c32e3c6b028b5f10a9d2545
       },
       age: {
          type: Number,
@@ -35,6 +45,7 @@ const UserSchema = new Schema(
    }
 );
 
+<<<<<<< HEAD
 //Hash the password
 UserSchema.pre('save', async function (next) {
    if (!this.isModified('password')) {
@@ -55,6 +66,8 @@ UserSchema.methods = {
    },
 };
 
+=======
+>>>>>>> 716ee4044c4903d80c32e3c6b028b5f10a9d2545
 const User = model('User', UserSchema);
 
 module.exports = User;
