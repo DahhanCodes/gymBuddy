@@ -1,17 +1,20 @@
 import React from "react";
-// import "./styles.css"
+import WorkoutCard from "../WorkoutCard";
+// import {useEffect, useState } from "react";
+import "./styles.css"
 
 function WorkoutsContainer({ workouts }) {
   return (
-    <div>
+    <div className="workout-container"> 
       {workouts.map((workout) => {
-        return <div>{workout.bodyPart}</div>;
+       return <WorkoutCard {...workout}/>
+        // return <div key={workout.id}>{workout.bodyPart}</div>;
       })}
     </div>
   );
 }
 
-export default WorkoutsContainer;
+
 
 
 
@@ -42,3 +45,5 @@ export default WorkoutsContainer;
 //     </div>
 //   );
 // }
+
+export default WorkoutsContainer;
