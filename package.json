@@ -11,24 +11,16 @@
    "author": "",
    "license": "ISC",
    "dependencies": {
-<<<<<<< HEAD
       "apollo-server": "^3.6.7",
       "apollo-server-express": "^2.25.3",
       "bcrypt": "^5.0.1",
-=======
-      "apollo-server-express": "^2.25.3",
->>>>>>> 716ee4044c4903d80c32e3c6b028b5f10a9d2545
       "cors": "^2.8.5",
       "express": "^4.17.3",
       "faker": "^4.1.0",
       "graphql": "^15.8.0",
-<<<<<<< HEAD
       "jsonwebtoken": "^8.5.1",
       "mongoose": "^5.13.14",
       "validator": "^13.7.0"
-=======
-      "mongoose": "^5.13.14"
->>>>>>> 716ee4044c4903d80c32e3c6b028b5f10a9d2545
    },
    "devDependencies": {
       "nodemon": "^2.0.4"
