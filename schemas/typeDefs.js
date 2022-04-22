@@ -26,11 +26,13 @@ const typeDefs = gql`
       user: User
    }
 
+   # Need to fix the Date in Discussion query.
    type Discussion {
       id: ID
       title: String
       content: String
       user: User
+      #createdAt: String
       comments: [Comment]
    }
 
@@ -38,7 +40,6 @@ const typeDefs = gql`
       id: ID
       comment_text: String
       user: User
-      discussion: Discussion
    }
 
    type Auth {
@@ -72,13 +73,11 @@ const typeDefs = gql`
    input DiscussionInput {
       title: String
       content: String
-      user: ID!
    }
 
    input CommentInput {
+      discussionId: ID!
       comment_text: String
-      user: ID!
-      discussion: ID
    }
 
    #Inputs for updates
@@ -96,20 +95,19 @@ const typeDefs = gql`
       getUser(id: ID): User
 
       #Queries for Workout
-      getAllWorkouts: [Workout]
-      getWorkout(id: ID): Workout
+      #getAllWorkouts: [Workout]
+      #getWorkout(id: ID): Workout
 
       #Queries for Schedule
-      getAllSchedules: [Schedule]
-      getSchedule(id: ID): Schedule
+      #getAllSchedules: [Schedule]
+      #getSchedule(id: ID): Schedule
 
       #Queries for Discussion
       getAllDiscussions: [Discussion]
       getDiscussion(id: ID): Discussion
+      getUserDiscussions: [Discussion]
 
       #Queries for Comment
-      getAllComments: [Comment]
-      getComment(id: ID): Comment
    }
 
    #Root Mutations
@@ -121,16 +119,20 @@ const typeDefs = gql`
       deleteUser: String
 
       #Mutations for Workout
-      createWorkout(workout: WorkoutInput): Workout
+      #createWorkout(workout: WorkoutInput): Workout
 
       #Mutations for Schedule
-      createSchedule(schedule: ScheduleInput): Schedule
+      #createSchedule(schedule: ScheduleInput): Schedule
 
       #Mutations for Discussion
       createDiscussion(discussion: DiscussionInput): Discussion
+      editDiscussion(id: ID, discussion: DiscussionInput): Discussion
+      deleteDiscussion(id: ID): String
 
       #Mutations for Comment
       createComment(comment: CommentInput): Comment
+      editComment(id: ID, comment_text: String): Comment
+      deleteComment(id: ID): String
    }
 `;
 

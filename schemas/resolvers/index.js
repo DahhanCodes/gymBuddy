@@ -1,24 +1,25 @@
 const userResolvers = require('./user');
+const discussionResolvers = require('./discussion');
+const commentResolvers = require('./comment');
+
 const resolvers = {
    Query: {
       //Users
       ...userResolvers.Query,
 
       //Workouts
-      async getAllWorkouts() {},
-      async getWorkout(_parent, { id }) {},
+      // async getAllWorkouts() {},
+      // async getWorkout(_parent, { id }) {},
 
       //Schedules
-      async getAllSchedules() {},
-      async getSchedule(_parent, { id }) {},
+      // async getAllSchedules() {},
+      // async getSchedule(_parent, { id }) {},
 
       //Discussions
-      async getAllDiscussions() {},
-      async getDiscussion(_parent, { id }) {},
+      ...discussionResolvers.Query,
 
       //Comments
-      async getAllComments() {},
-      async getComment(_parent, { id }) {},
+      ...commentResolvers.Query,
    },
 
    Mutation: {
@@ -26,16 +27,16 @@ const resolvers = {
       ...userResolvers.Mutation,
 
       //Workouts
-      async createWorkout(_parent, args) {},
+      // async createWorkout(_parent, args) {},
 
       //Schedule
-      async createSchedule(_parent, args) {},
+      // async createSchedule(_parent, args) {},
 
       //Discussion
-      async createDiscussion(_parent, args) {},
+      ...discussionResolvers.Mutation,
 
       //Comments
-      async createComment(_parent, args) {},
+      ...commentResolvers.Mutation,
    },
 };
 
