@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const QUERIES = gql`
+const QUERY_USER = gql`
   query user {
     user {
       _id
@@ -10,16 +10,36 @@ export const QUERIES = gql`
       age
     }
   }
-  query discussion{
-      discussion{
-        _id
-        Title
-        content
-        date
-        user
-        comments
-      }
-  }
+  
+`;
+
+const QUERY_SCHEDULE = gql`
+query discussion{
+    discussion{
+      _id
+      content
+      dates
+      type
+      user
+      
+    }
+}
+  `;
+
+const QUERY_DISCUSSION = gql`
+query discussion{
+    discussion{
+      _id
+      Title
+      content
+      date
+      user
+      comments
+    }
+}
+  `;
+
+const QUERY_COMMENT = gql`
   query comment{
     comment{
       _id
@@ -29,16 +49,10 @@ export const QUERIES = gql`
      
     }
 }
-query schedule{
-    schedule{
-      _id
-      content
-      dates
-      type
-      user
-    }
-}
-query workout{
+  `;
+
+const QUERY_WORKOUT = gql`
+  query workout{
     workout{
       _id
       title
@@ -48,3 +62,5 @@ query workout{
     }
 }
 `;
+
+module.exports= QUERY_USER,QUERY_SCHEDULE,QUERY_DISCUSSION,QUERY_COMMENT,QUERY_WORKOUT;
