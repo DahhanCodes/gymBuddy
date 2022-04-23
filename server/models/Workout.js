@@ -1,6 +1,6 @@
-const { Schema, model } = require('mongoose');
-const Schedule = require('./Schedule');
-const User = require('./User');
+const { Schema, model, Types } = require('mongoose');
+
+
 
 const WorkoutSchema = new Schema({
   title: {
@@ -8,24 +8,16 @@ const WorkoutSchema = new Schema({
     required: true,
   },
   time: {
-    type: String,
-    refrence: {
-        model: Schedule,
-        key: 'dates'
-
-    }
+    type: Types.ObjectId,
+    ref: 'Schedule',
   },
   detail: {
     type: String,
     required: true,
   },
-  user_id: {
-    type: String,
-    references: {
-        model: User,
-        key: 'id'
-    },
-    required: true,
+  user: {
+    type: Types.ObjectId,
+    ref: 'User',
   },
 });
 
