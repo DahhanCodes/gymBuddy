@@ -1,10 +1,11 @@
-import Jumbotron  from "../../components/Jumbotron";
+import Jumbotron from "../../components/Jumbotron";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
 import WorkoutsContainer from "../../components/WorkoutsContainer";
+import { MyContext } from "../../context";
 
 function Home() {
-  const [workouts, setWorkouts] = useState([]);
+  const { workouts, setWorkouts } = useContext(MyContext);
 
   useEffect(() => {
     axios
@@ -17,9 +18,7 @@ function Home() {
       })
       .then(({ data }) => setWorkouts(data))
       .catch((error) => console.log(error));
-    
-      
-  },[]);
+  }, []);
 
   return (
     <div>
@@ -29,8 +28,4 @@ function Home() {
   );
 }
 
-
 export default Home;
-
-
-
