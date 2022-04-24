@@ -1,21 +1,27 @@
-import React from 'react'
-import {Navbar, Container, Nav, NavDropdown} from 'react-bootstrap'
-
+import React from "react";
+import { Navbar, Container, Nav } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 function MyNavbar() {
   return (
     <Navbar bg="light" expand="lg">
-    <Container>
-      <Navbar.Brand href="#home">Workouts</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="me-auto">
-          <Nav.Link href="#home">Home</Nav.Link>
-          <Nav.Link href="#link">Login</Nav.Link>
-        </Nav>
-      </Navbar.Collapse>
-    </Container>
-  </Navbar>
-  )
+      <Container>
+        <LinkContainer to="/">
+          <Navbar.Brand>Workouts</Navbar.Brand>
+        </LinkContainer>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <LinkContainer to="/login">
+              <Nav.Link>Login</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/signup">
+              <Nav.Link>Signup</Nav.Link>
+            </LinkContainer>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
 }
 
-export default MyNavbar
+export default MyNavbar;

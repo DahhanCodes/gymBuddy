@@ -4,6 +4,8 @@ import Navbar from "./components/Navbar";
 import AppContext from "./context";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import ErrorPage from "./pages/404/404.js";
+import Login from "./pages/Login/Login";
+import Signup from "./pages/Signup/Signup";
 
 function App() {
   return (
@@ -15,7 +17,10 @@ function App() {
             <Home />
           </Route>
           <Route exact path="/login">
-            <Home />
+            <Login />
+          </Route>
+          <Route exact path="/signup">
+            <Signup />
           </Route>
           <Route>
             <ErrorPage />
