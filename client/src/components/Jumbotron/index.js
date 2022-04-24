@@ -15,7 +15,7 @@ function Jumbotron() {
         headers: {
           "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
           "X-RapidAPI-Key":
-            "c9bc40e250mshc9a0253036e8abep1a9eccjsn02f8dbdd6992",
+            "28f0229b05msh1c360e05315a6bdp1743dcjsna40d7e104ccf",
         },
       })
       .then(({ data }) => setWorkouts(data));
