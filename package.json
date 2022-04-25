@@ -1,5 +1,5 @@
 {
-  "name": "gymbuddy",
+  "name": "gymbuddy-client",
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
