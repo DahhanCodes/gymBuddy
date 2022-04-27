@@ -1,19 +1,22 @@
-import axios from "axios";
+import axios from "../../Axios";
 import React, { useContext, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { MyContext } from "../../context";
 function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {setUser} = useContext(MyContext)
+  const { setUser } = useContext(MyContext);
   function handleSignup(e) {
     e.preventDefault();
     if (!email || !password) {
       return alert("Please fill out required fields");
     }
     axios
-      .post("http://localhost:3001/users", { email, password })
-      .then(({ data }) => setUser(data))
+      .post("/users", { email, password })
+      .then(({ data }) => {
+        setUser(data);
+        localStorage.setItem("token", data.token);
+      })
       .catch((err) => console.log(err));
   }
 
