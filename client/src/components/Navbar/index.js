@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { MyContext } from "../../context";
-import { useHistory } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 import axios from "../../Axios";
 function MyNavbar() {
   const history = useHistory();
@@ -11,7 +11,7 @@ function MyNavbar() {
     axios.post("/logout").then(() => {
       localStorage.removeItem("token");
       setUser(null);
-      history.replace('/');
+      history.replace("/");
     });
   };
   return (
@@ -32,7 +32,14 @@ function MyNavbar() {
               </LinkContainer>
             </Nav>
           )}
-          {user && <Nav.Link onClick={handleLogout}>Logout</Nav.Link>}
+          {user && (
+            <>
+            <LinkContainer to="/my-favourites">
+                <Nav.Link>Favourites</Nav.Link>
+              </LinkContainer>
+              <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+            </>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>

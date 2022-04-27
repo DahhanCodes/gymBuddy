@@ -36,4 +36,20 @@ router.post('/logout', authUser, async (req, res) =>{
   res.status(200).send()
 })
 
+router.post('/add-favourites', authUser, async(req, res) =>{
+  const {workoutId} = req.body
+  const user = req.user;
+  user.favourites.push(workoutId);
+  await user.save();
+  res.status(200).send(user)
+})
+
+router.post('/remove-favourites', authUser, async(req, res) =>{
+  const {workoutId} = req.body
+  const user = req.user;
+  user.favourites = user.favourites.filter(id => id !== workoutId)
+  await user.save();
+  res.status(200).send(user)
+})
+
 module.exports = router;
