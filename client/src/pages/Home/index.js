@@ -10,7 +10,8 @@ function Home() {
     fetch("https://exercisedb.p.rapidapi.com/exercises", {
       headers: {
         "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
-        "X-RapidAPI-Key": "28f0229b05msh1c360e05315a6bdp1743dcjsna40d7e104ccf",
+        // insert api key
+        "X-RapidAPI-Key": "",
       },
     })
       .then((res) => res.json())
@@ -29,3 +30,7 @@ function Home() {
 }
 
 export default Home;
+
+
+
+// 193a3e7c2dmsh83c0994ee72ca68p157399jsn0728549a0461

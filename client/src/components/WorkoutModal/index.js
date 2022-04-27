@@ -6,6 +6,7 @@ import axios from "../../Axios";
 function WorkoutModal({ title, target, equipment, name, id }) {
   const [show, setShow] = useState(false);
   const { user, setUser } = useContext(MyContext);
+  const [loading, setLoading] = useState(false);
   console.log(id);
 
   const handleClose = () => setShow(false);
@@ -13,24 +14,35 @@ function WorkoutModal({ title, target, equipment, name, id }) {
 
   const handleAddToFavourites = () => {
     console.log("workoutId", id);
+    setLoading(true);
     axios
       .post("/add-favourites/", { workoutId: id })
       .then(({ data }) => {
+        setLoading(false);
+
         setUser(data);
         alert("Meal Added to Favourites");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setLoading(false);
+        console.log(err);
+      });
   };
 
   const handleRemoveFromFavourites = () => {
-    console.log("workoutId", id);
+    setLoading(true);
     axios
       .post("/remove-favourites/", { workoutId: id })
       .then(({ data }) => {
+        setLoading(false);
+
         setUser(data);
         alert("Meal Removed from Favourites");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setLoading(false);
+        console.log(err);
+      });
   };
 
   return (
@@ -53,11 +65,19 @@ function WorkoutModal({ title, target, equipment, name, id }) {
           {user && (
             <>
               {user.favourites.includes(id) ? (
-                <Button variant="danger" onClick={handleRemoveFromFavourites}>
+                <Button
+                  variant="danger"
+                  onClick={handleRemoveFromFavourites}
+                  disabled={loading}
+                >
                   Remove from Favourites
                 </Button>
               ) : (
-                <Button variant="primary" onClick={handleAddToFavourites}>
+                <Button
+                  variant="primary"
+                  onClick={handleAddToFavourites}
+                  disabled={loading}
+                >
                   Add To Favourite Workouts
                 </Button>
               )}

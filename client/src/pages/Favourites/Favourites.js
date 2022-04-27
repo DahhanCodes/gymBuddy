@@ -1,23 +1,32 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MyContext } from "../../context";
 import { Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import WorkoutCard from "../../components/WorkoutCard"
 
 function Favourites() {
   const { user } = useContext(MyContext);
+  const [favourites, setFavourites] = useState([]);
   useEffect(() => {
-    // fetch("https://exercisedb.p.rapidapi.com/exercises/exercise/%7Bid%7D", {
-    //   headers: {
-    //     "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
-    //     "X-RapidAPI-Key": "28f0229b05msh1c360e05315a6bdp1743dcjsna40d7e104ccf",
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setWorkouts(data);
-    //   })
-    //   .catch((error) => console.log(error));
-  }, []);
+    if (user.favourites.length) {
+      const requests = user.favourites.map((favourite) =>
+        fetch(
+          `https://exercisedb.p.rapidapi.com/exercises/exercise/${favourite}`,
+          {
+            headers: {
+              "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
+              // insert api key
+              "X-RapidAPI-Key":
+                "",
+            },
+          }
+        ).then((res) => res.json())
+      );
+
+      Promise.all(requests).then((res) => setFavourites(res));
+    }
+  }, [user]);
+
   if (!user.favourites.length) {
     return (
       <div>
@@ -31,8 +40,17 @@ function Favourites() {
   return (
     <div>
       <h2>Your Favourites</h2>
+      <div className="workout-container">
+        {favourites.map((workout) => {
+          return <WorkoutCard key={workout.idWorkout} {...workout} />;
+        })}
+      </div>{" "}
     </div>
   );
 }
 
 export default Favourites;
+
+// Promise.all(...requests).then(res => console.log(res));
+
+// `https://exercisedb.p.rapidapi.com/exercises/exercise/${favourite}`
