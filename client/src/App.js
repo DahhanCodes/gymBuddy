@@ -1,47 +1,47 @@
-import Home from "./pages/Home";
-import Navbar from "./components/Navbar";
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import ErrorPage from "./pages/404/404.js";
-import Login from "./pages/Login/Login";
-import Signup from "./pages/Signup/Signup";
-import { MyContext } from "./context";
-import { useContext, useEffect } from "react";
-import axios from "./Axios";
-import Favourites from "./pages/Favourites/Favourites";
+import { useContext } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import { MyContext } from './context';
+import ErrorPage from './pages/404/404.js';
+import Favourites from './pages/Favourites/Favourites';
+import Home from './pages/Home';
+import Login from './pages/Login/Login';
+import Signup from './pages/Signup/Signup';
 
 function App() {
-  const { user, setUser } = useContext(MyContext);
-  useEffect(() => {
-    axios.post("/auto-login").then(({ data }) => setUser(data));
-  }, []);
-  return (
-    <Router>
-      <Navbar />
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        {!user && (
-          <>
-            <Route exact path="/login" >
-              <Login />
+   const { user, setUser } = useContext(MyContext);
+   // useEffect(() => {
+   //    axios.post('/auto-login').then(({ data }) => setUser(data));
+   // }, []);
+
+   return (
+      <Router>
+         <Navbar />
+         <Switch>
+            <Route exact path="/">
+               <Home />
             </Route>
-            <Route exact path="/signup">
-              <Signup />
+            {!user && (
+               <>
+                  <Route exact path="/login">
+                     <Login />
+                  </Route>
+                  <Route exact path="/signup">
+                     <Signup />
+                  </Route>
+               </>
+            )}
+            {user && (
+               <Route exact path="/my-favourites">
+                  <Favourites />
+               </Route>
+            )}
+            <Route>
+               <ErrorPage />
             </Route>
-          </>
-        )}
-        {user && (
-          <Route exact path="/my-favourites">
-            <Favourites />
-          </Route>
-        )}
-        <Route>
-          <ErrorPage />
-        </Route>
-      </Switch>
-    </Router>
-  );
+         </Switch>
+      </Router>
+   );
 }
 
 export default App;
