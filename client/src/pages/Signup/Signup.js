@@ -28,6 +28,7 @@ function Signup() {
         setUser(data);
         localStorage.setItem("token", data.token);
         history.replace('/')
+        window.location.reload()
       })
       .catch((err) => console.log(err));
   }

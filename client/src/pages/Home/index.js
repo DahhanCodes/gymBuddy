@@ -31,6 +31,4 @@ function Home() {
 
 export default Home;
 
-
-
 // 193a3e7c2dmsh83c0994ee72ca68p157399jsn0728549a0461

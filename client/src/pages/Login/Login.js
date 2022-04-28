@@ -3,9 +3,9 @@ import axios from "../../Axios";
 import { Form, Button, Modal} from "react-bootstrap";
 import {useHistory} from 'react-router-dom'
 import { MyContext } from "../../context";
-const loggedIn = () =>{
-  window.location.replace("/")
-}
+// const loggedIn = () =>{
+//   window.location.replace("/")
+// }
 const  Login= () => {
   const history = useHistory();
   const [email, setEmail] = useState("");
@@ -14,12 +14,12 @@ const  Login= () => {
   function handleLogin(e) {
     e.preventDefault();
     if (!email || !password) {
-      return(
-        <Modal>
-          <Modal.Body>
-            Please enter a username and password
-          </Modal.Body>
-        </Modal>
+      return(alert("please fill fields")
+        // <Modal>
+        //   <Modal.Body>
+        //     Please enter a username and password
+        //   </Modal.Body>
+        // </Modal>
       );
     }
     axios
@@ -28,6 +28,7 @@ const  Login= () => {
         localStorage.setItem("token", data.token);
         setUser(data);
         history.replace('/')
+        window.location.reload()
       })
       .catch((err) => console.log(err));
   }
@@ -58,7 +59,7 @@ const  Login= () => {
         />
       </Form.Group>
 
-      <Button variant="primary" type="submit" onClick={loggedIn}>
+      <Button variant="primary" type="submit">
         Login
       </Button>
     </Form>
