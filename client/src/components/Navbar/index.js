@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useContext, } from 'react';
+=======
+import React, { useContext } from 'react';
+>>>>>>> 039259babb8a4e416dcb013616efd150aac6891d
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useHistory } from 'react-router-dom';
