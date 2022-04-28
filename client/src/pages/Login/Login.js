@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import axios from "../../Axios";
 import { Form, Button } from "react-bootstrap";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 import { MyContext } from "../../context";
 
 function Login() {
@@ -19,7 +19,8 @@ function Login() {
       .then(({ data }) => {
         localStorage.setItem("token", data.token);
         setUser(data);
-        history.replace('/')
+        history.replace("/");
+        window.location.reload();
       })
       .catch((err) => console.log(err));
   }

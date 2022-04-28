@@ -1,19 +1,20 @@
-import Home from "./pages/Home";
+import { useContext, useEffect } from "react";
+import axios from "axios";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import { MyContext } from "./context";
 import ErrorPage from "./pages/404/404.js";
+import Favourites from "./pages/Favourites/Favourites";
+import Home from "./pages/Home";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
-import { MyContext } from "./context";
-import { useContext, useEffect } from "react";
-import axios from "./Axios";
-import Favourites from "./pages/Favourites/Favourites";
 
 function App() {
   const { user, setUser } = useContext(MyContext);
   useEffect(() => {
     axios.post("/auto-login").then(({ data }) => setUser(data));
   }, []);
+
   return (
     <Router>
       <Navbar />
@@ -23,7 +24,7 @@ function App() {
         </Route>
         {!user && (
           <>
-            <Route exact path="/login" >
+            <Route exact path="/login">
               <Login />
             </Route>
             <Route exact path="/signup">

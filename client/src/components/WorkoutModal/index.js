@@ -21,7 +21,6 @@ function WorkoutModal({ title, target, equipment, name, id }) {
         setLoading(false);
 
         setUser(data);
-        alert("Meal Added to Favourites");
       })
       .catch((err) => {
         setLoading(false);
@@ -37,7 +36,6 @@ function WorkoutModal({ title, target, equipment, name, id }) {
         setLoading(false);
 
         setUser(data);
-        alert("Meal Removed from Favourites");
       })
       .catch((err) => {
         setLoading(false);

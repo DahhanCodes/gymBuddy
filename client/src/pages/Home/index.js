@@ -11,7 +11,7 @@ function Home() {
       headers: {
         "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
         // insert api key
-        "X-RapidAPI-Key": "",
+        "X-RapidAPI-Key": "c9bc40e250mshc9a0253036e8abep1a9eccjsn02f8dbdd6992",
       },
     })
       .then((res) => res.json())
@@ -30,7 +30,5 @@ function Home() {
 }
 
 export default Home;
-
-
 
 // 193a3e7c2dmsh83c0994ee72ca68p157399jsn0728549a0461

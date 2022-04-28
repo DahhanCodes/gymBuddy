@@ -2,7 +2,7 @@ import axios from "../../Axios";
 import React, { useContext, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { MyContext } from "../../context";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 function Signup() {
   const history = useHistory();
   const [email, setEmail] = useState("");
@@ -18,7 +18,8 @@ function Signup() {
       .then(({ data }) => {
         setUser(data);
         localStorage.setItem("token", data.token);
-        history.replace('/')
+        history.replace("/");
+        window.location.reload();
       })
       .catch((err) => console.log(err));
   }
