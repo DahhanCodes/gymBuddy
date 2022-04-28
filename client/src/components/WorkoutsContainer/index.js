@@ -7,7 +7,8 @@ function WorkoutsContainer({ workouts }) {
   return (
     <div className="workout-container"> 
       {workouts.map((workout) => {
-       return <WorkoutCard {...workout}/>
+        
+       return <WorkoutCard key={workout.idWorkout}  {...workout}/>
         // return <div key={workout.id}>{workout.bodyPart}</div>;
       })}
     </div>

@@ -1,53 +1,47 @@
-import React from "react";
-import { useQuery } from '@apollo/client';
-import { Form, Button, Modal } from "react-bootstrap";
-import { QUERY_USERS } from '../../utils/queries';
-import { format } from "express/lib/response";
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import Home from "../../pages/Home"
-const { loading, data } = useQuery(QUERY_USERS);
-const User = data?.User || [];
-console.log(User);
-const LoginPage = () => {
-  $('#loginForm').on('submit', function identify() {
-    var emailInput = $('#emailInput').val().trim();
-    var passInput = $('#passInput').val().trim();
-    if (emailInput == loginInfo.User.email && passInput == loginInfo.User.password) {
-      return (
-        <Router>
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-          </Switch>
-        </Router>
-      )
-    }
-    else {
-      LoginPage()
-      return (
+import React, { useState, useContext } from "react";
+import axios from "../../Axios";
+import { Form, Button, Modal} from "react-bootstrap";
+import {useHistory} from 'react-router-dom'
+import { MyContext } from "../../context";
+const loggedIn = () =>{
+  window.location.replace("/")
+}
+const  Login= () => {
+  const history = useHistory();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { setUser } = useContext(MyContext);
+  function handleLogin(e) {
+    e.preventDefault();
+    if (!email || !password) {
+      return(
         <Modal>
-          <Modal.Title>
-            Wrong Login Info
-          </Modal.Title>
           <Modal.Body>
-            Please make sure you are using the correct username and password
+            Please enter a username and password
           </Modal.Body>
         </Modal>
-        
-      )
+      );
     }
-
-  })
-  const loginInfo = map.User(identify);
-
-
-
+    axios
+      .post("/login", { email, password })
+      .then(({ data }) => {
+        localStorage.setItem("token", data.token);
+        setUser(data);
+        history.replace('/')
+      })
+      .catch((err) => console.log(err));
+  }
   return (
-    <Form id="loginForm">
+    <Form onSubmit={handleLogin}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control id="emailInput" type="email" placeholder="Enter email" />
+        <Form.Label>Email Address</Form.Label>
+        <Form.Control
+          type="email"
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          required
+        />
         <Form.Text className="text-muted">
           We'll never share your email with anyone else.
         </Form.Text>
@@ -55,16 +49,20 @@ const LoginPage = () => {
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
-        <Form.Control id="passInput" type="password" placeholder="Password" />
+        <Form.Control
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          required
+        />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
+
+      <Button variant="primary" type="submit" onClick={loggedIn}>
+        Login
       </Button>
     </Form>
   );
 }
 
-export default LoginPage;
+export default Login;
